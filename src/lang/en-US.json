@@ -1,0 +1,8 @@
+{
+    "title" : "login",
+    "info": "The current language is {locale}.",
+    "label" : "language : ",
+    "username" : "User ID",
+    "password" : "PassWord",
+    "submit" : "Enter"
+}
