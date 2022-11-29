@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
+//다국어 처리 import
+import { IntlProvider } from "react-intl";
+import IntlPage from './components/Login/intlage';
+
 //인증 관련
 import { signIn } from './auth/auth';
 import AuthRoute from './auth/AuthRoute';
@@ -10,14 +14,23 @@ import About from './components/About';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 //로그인 관련
-import LoginForm from './components/Login/LoginForm';
+// import LoginForm from './components/Login/LoginForm';
+// import IntlLoginForm from './components/Login/IntlLoginForm';
 import LogoutButton from './components/Login/LogoutButton';
+
+//국가별 jsonData
+import enUsMsg from "../src/lang/en-US.json";
+import koMsg  from "../src/lang/ko.json";
 
 function App() {
   const [user, setUser] = useState(null);
   const authenticated = user != null;
 
-  const login = ({ email, password }) => setUser(signIn({ email, password }));
+  //locale 선언
+  const locale = localStorage.getItem("locale") ?? "ko";
+  const messages = { "en-US": enUsMsg, ko: koMsg }[locale];
+
+  const login = ({ username, password }) => setUser(signIn({ username, password }));
   const logout = () => setUser(null);
 
   return (
@@ -48,7 +61,12 @@ function App() {
           <Route
             path="/login"
             render={props => (
-              <LoginForm authenticated={authenticated} login={login} {...props} />
+              
+              <IntlProvider locale={locale} messages={messages}>
+                <IntlPage authenticated={authenticated} login={login} {...props} />
+              </IntlProvider>
+
+             // <LoginForm authenticated={authenticated} login={login} {...props} />
             )}
           />
           <AuthRoute

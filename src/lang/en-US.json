@@ -4,5 +4,5 @@
     "label" : "language : ",
     "username" : "User ID",
     "password" : "PassWord",
-    "submit" : "Enter"
+    "btn" : "Enter"
 }

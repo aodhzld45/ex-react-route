@@ -4,5 +4,5 @@
     "label" : "언어 : ",
     "username" : "아이디",
     "password" : "비밀번호",
-    "submit" : "확인"
+    "btn" : "확인"
 }
